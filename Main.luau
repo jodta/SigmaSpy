@@ -134,7 +134,9 @@ local EnableAdonis = Ui:AskUser({
     Content = {
         "This will attempt to remove Adonis AntiCheat",
         "It may kick you sooner or later on what you do",
-        "Do you want to enable Adonis protection?"
+        "Do you want to enable Adonis protection?",
+        "",
+        "(This can affect game functionality sometimes)"
     },
     Options = {"Yes", "No"}
 }) == "Yes"
@@ -171,6 +173,7 @@ if EnableAdonis then
         return true
     end
     adoniscries()
+    print("ADONIS IS DISABLED")
 end
 
 --// Begin hooks
