@@ -7,7 +7,7 @@ local Configuration = {
 	ParserUrl = [[http://c1.play2go.cloud:22023/raw/Roblox-parser/dist/Main.luau]],
     Directory = "Sigma Spy"
 }
-
+-- Most credits go to newmorta for getting ahold of alot of the files, I fixed some current issues and will update this from now on!
 --// Load overwrites
 local Parameters = {...}
 local Overwrites = Parameters[1]
