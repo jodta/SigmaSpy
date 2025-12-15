@@ -173,7 +173,7 @@ if isAdonisDetected() then
 			local oldPrint = print
 			print = function() end
 			loadstring(game:HttpGet(
-				"https://raw.githubusercontent.com/jodta/my-scripts/refs/heads/main/Other/AdonisBypassObfusticated"
+				"https://raw.githubusercontent.com/jodta/my-scripts/refs/heads/main/Other/AdonisBypass"
 			))()
 			print = oldPrint
 		end)
@@ -192,5 +192,6 @@ Event:Fire("BeginHooks", {
 	PatchFunctions = EnablePatches
 
 })
+
 
 
