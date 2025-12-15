@@ -128,25 +128,63 @@ local EnablePatches = Ui:AskUser({
 	Options = {"Yes", "No"}
 }) == "Yes"
 
---// Adonis protection prompt
-local EnableAdonis = Ui:AskUser({
-    Title = "Adonis Protection",
-    Content = {
-        "This will attempt to remove Adonis AntiCheat",
-        "It may kick you sooner or later on what you do",
-        "Do you want to enable Adonis protection?",
-        "",
-        "(This can affect game functionality sometimes)"
-    },
-    Options = {"Yes", "No"}
-}) == "Yes"
+--// Detect Adonis
+local function isAdonisDetected()
+	local detected = false
+	pcall(function()
+		for _, inst in ipairs(game:GetDescendants()) do
+			local name = inst.Name:lower()
+			if name:find("adonis") or name:find("admin") then
+				detected = true
+				break
+			end
+		end
+	end)
+	if not detected then
+		pcall(function()
+			for _, inst in ipairs(getnilinstances()) do
+				local name = inst.Name:lower()
+				if name:find("adonis") or name:find("admin") then
+					detected = true
+					break
+				end
+			end
+		end)
+	end
 
-if EnableAdonis then
-    pcall(function()
-        loadstring(game:HttpGet(
-            "https://raw.githubusercontent.com/xiaomao8090/Adonis-Bypass-Framework/master/AdonisBypass.lua"
-        ))()
-    end)
+	return detected
+end
+
+--// Ask user if detected
+if isAdonisDetected() then
+	local EnableProtection = Ui:AskUser({
+		Title = "Adonis Detected",
+		Content = {
+			"Hey User, Adonis is detected.",
+			"This game is running Adonis admin / anticheat.",
+			"",
+			"Would you like to enable protection?"
+		},
+		Options = {"Yes", "No"}
+	}) == "Yes"
+
+	if EnableProtection then
+		pcall(function()
+			local oldPrint = print
+			print = function() end
+			loadstring(game:HttpGet(
+				"https://raw.githubusercontent.com/jodta/my-scripts/refs/heads/main/Other/AdonisBypassObfusticated"
+			))()
+			print = oldPrint
+		end)
+		Ui:AskUser({
+			Title = "Protection Status",
+			Content = {
+				"Protection completed."
+			},
+			Options = {"Okay"}
+		})
+	end
 end
 
 --// Begin hooks
@@ -154,4 +192,5 @@ Event:Fire("BeginHooks", {
 	PatchFunctions = EnablePatches
 
 })
+
 
