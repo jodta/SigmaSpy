@@ -128,7 +128,7 @@ local EnablePatches = Ui:AskUser({
 	Options = {"Yes", "No"}
 }) == "Yes"
 
---// Ask user if they want to enable Adonis protection
+--// Adonis protection prompt
 local EnableAdonis = Ui:AskUser({
     Title = "Adonis Protection",
     Content = {
@@ -142,38 +142,11 @@ local EnableAdonis = Ui:AskUser({
 }) == "Yes"
 
 if EnableAdonis then
-    local function adoniscries()
-        pcall(function()
-            for _, instance in ipairs(game:GetDescendants()) do
-                if instance.Name:lower():match("adonis") or
-                   instance.Name == "__FUNCTION" or
-                   instance.Name:match("ClientMover") then
-                    instance:Destroy()
-                end
-            end
-        end)
-        pcall(function()
-            for _, instance in ipairs(getnilinstances()) do
-                if instance:IsA("RemoteEvent") or
-                   instance:IsA("RemoteFunction") or
-                   instance.Name:match("ClientMover") or
-                   instance.Name == "__FUNCTION" then
-                    instance:Destroy()
-                end
-            end
-        end)
-        local oldFireServer
-        oldFireServer = hookfunction(Instance.new("RemoteEvent").FireServer, function(self, ...)
-            local args = {...}
-            if typeof(args[1]) == "table" and args[1].Mode == "Get" then
-                return
-            end
-            return oldFireServer(self, ...)
-        end)
-        return true
-    end
-    adoniscries()
-    print("ADONIS IS DISABLED")
+    pcall(function()
+        loadstring(game:HttpGet(
+            "https://raw.githubusercontent.com/xiaomao8090/Adonis-Bypass-Framework/master/AdonisBypass.lua"
+        ))()
+    end)
 end
 
 --// Begin hooks
