@@ -128,7 +128,7 @@ local EnablePatches = Ui:AskUser({
 	Options = {"Yes", "No"}
 }) == "Yes"
 
---// Detect Adonis
+--// Detect Adonis, always activates because I didnt add proper detection, will fix soon!
 local function isAdonisDetected()
 	local detected = false
 	pcall(function()
@@ -158,10 +158,10 @@ end
 --// Ask user if detected
 if isAdonisDetected() then
 	local EnableProtection = Ui:AskUser({
-		Title = "Adonis Detected",
+		Title = "Adonis Protection",
 		Content = {
-			"Hey User, Adonis is detected.",
-			"This game is running Adonis admin / anticheat.",
+			"Hey User, Adonis may be running in the game!",
+			"This feature is built in to ensure that you dont get kicked.",
 			"",
 			"Would you like to enable protection?"
 		},
